@@ -23,3 +23,9 @@ You can run the following command for example
 ```bash
 g++ -std=c++11 -lcurl test/test.cpp Request.cpp Request.h
 ```
+
+And run command below to test
+
+```bash
+./a.out
+```
