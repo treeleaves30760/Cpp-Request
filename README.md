@@ -4,13 +4,7 @@
 
 This is a c++ library for web API request.
 
-## Usage
-
-You can include the Resquest.h in your code
-
-```c++
-#include "Request.h"
-```
+## Installation
 
 And use g++ for compile
 
@@ -28,4 +22,22 @@ And run command below to test
 
 ```bash
 ./a.out
+```
+
+## Usage
+
+You can include the Resquest.h in your code
+
+```c++
+#include "Request.h"
+```
+
+The simple example of the code
+
+```c++
+Request re;
+string s;
+s = re.Get("https://example.com");
+cout << re.get_content() << endl;   // output the response of URL
+cout << re.get_status() << endl;    // output the response status
 ```
