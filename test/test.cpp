@@ -12,6 +12,9 @@ int test_get()
         s = re.Get("https://example.com");
         cout << re.get_content() << endl;
         cout << "HTTP Status: " << re.get_status() << endl;
+        cout << "Response Header: " << re.get_response_header() << endl;
+        cout << "Response Cookie: " << re.get_response_cookie() << endl;
+        cout << "Response History: " << re.get_response_history() << endl;
     }
     catch (...)
     {
@@ -42,6 +45,9 @@ int test_post()
         {
             std::cout << "HTTP Status: " << statusCode << std::endl;
             std::cout << "Response: " << response << std::endl;
+            cout << "Response Header: " << request.get_response_header() << endl;
+            cout << "Response Cookie: " << request.get_response_cookie() << endl;
+            cout << "Response History: " << request.get_response_history() << endl;
         }
         else
         {

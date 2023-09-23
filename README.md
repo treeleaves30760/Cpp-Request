@@ -2,17 +2,17 @@
 
 ## Descriptiom
 
-This is a c++ library for web API request.
+This is a c++ library for web API request, you can use it like Python's request.
 
 ## Installation
 
-And use g++ for compile
+Use g++ for compile
 
 ```bash
 g++ -std=c++11 -lcurl [your_program_files]
 ```
 
-You can run the following command for example
+You can run the following command for testing and example
 
 ```bash
 g++ -std=c++11 -lcurl test/test.cpp Request.cpp Request.h
@@ -26,7 +26,7 @@ And run command below to test
 
 ## Usage
 
-You can include the Resquest.h in your code
+Include the Resquest.h in your code
 
 ```c++
 #include "Request.h"

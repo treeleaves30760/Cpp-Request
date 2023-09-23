@@ -1,9 +1,12 @@
 #include "Request.h"
-Request::Request(/* args */)
+Request::Request()
 {
     content = "";
     curl = curl_easy_init();
     http_status = -1;
+    response_header = "";
+    response_cookie = "";
+    response_history = "";
 }
 
 Request::~Request()
@@ -29,6 +32,9 @@ std::string Request::Get(const std::string &URL)
 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
+
+    curl_easy_setopt(curl, CURLOPT_HEADERDATA, &response_header);
+    curl_easy_setopt(curl, CURLOPT_COOKIELIST, &response_cookie);
 
     CURLcode result = curl_easy_perform(curl);
 
@@ -60,8 +66,14 @@ std::string Request::Post(const std::string &URL, const nlohmann::json &jsonData
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postData.c_str());
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
+    curl_easy_setopt(curl, CURLOPT_HEADERDATA, &response_header);
+    curl_easy_setopt(curl, CURLOPT_COOKIELIST, &response_cookie);
+
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
+
+    curl_easy_setopt(curl, CURLOPT_HEADERDATA, &response_header);
+    curl_easy_setopt(curl, CURLOPT_COOKIELIST, &response_cookie);
 
     CURLcode result = curl_easy_perform(curl);
 
