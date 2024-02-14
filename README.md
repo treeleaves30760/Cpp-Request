@@ -87,3 +87,22 @@ std::string cookies = request.get_response_cookie();
 ```cpp
 std::string history = request.get_response_history();
 ```
+
+### SetHeaders
+
+If you need to add HTTP headers to a request, use nlohmann json structure
+
+```cpp
+nlohmann::json headers;
+headers["User-Agent"] = "MyApp";
+headers["Authorization"] = "Bearer 12345";
+
+request.SetHeaders(headers);
+```
+
+If you need to get HTTP headers for a request, call the GetHeaders function, and it will return in nlohmann json structure
+
+```cpp
+nlohmann::json headers;
+headers = request.GetHeaders();
+```

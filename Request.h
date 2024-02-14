@@ -12,6 +12,7 @@ private:
     std::string response_history;
     CURL *curl;
     HTTPSTATUS http_status;
+    struct curl_slist *curl_headers;
 
 public:
     Request();
@@ -23,6 +24,8 @@ public:
 
     HTTPSTATUS get_status();
     std::string get_content();
+    void SetHeaders(const nlohmann::json &headers);
+    nlohmann::json GetHeaders();
     std::string get_response_header() const { return response_header; }
     std::string get_response_cookie() const { return response_cookie; }
     std::string get_response_history() const { return response_history; }

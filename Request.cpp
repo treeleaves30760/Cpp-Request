@@ -7,10 +7,15 @@ Request::Request()
     response_header = "";
     response_cookie = "";
     response_history = "";
+    curl_headers = NULL;
 }
 
 Request::~Request()
 {
+    if (curl_headers)
+    {
+        curl_slist_free_all(curl_headers);
+    }
 }
 
 size_t Request::write_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
@@ -97,4 +102,37 @@ HTTPSTATUS Request::get_status()
 std::string Request::get_content()
 {
     return content;
+}
+
+void Request::SetHeaders(const nlohmann::json &headers)
+{
+
+    if (curl_headers)
+    {
+        curl_slist_free_all(curl_headers);
+        curl_headers = NULL;
+    }
+
+    for (auto &[name, value] : headers.items())
+    {
+        std::string header = name + ": " + value.get<std::string>();
+        curl_headers = curl_slist_append(curl_headers, header.c_str());
+    }
+
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, curl_headers);
+}
+
+nlohmann::json Request::GetHeaders()
+{
+    nlohmann::json headers;
+    struct curl_slist *header_list;
+    curl_easy_getinfo(curl, CURLINFO_COOKIELIST, &header_list);
+    for (struct curl_slist *next = header_list; next; next = next->next)
+    {
+        std::string header = next->data;
+        std::string name = header.substr(0, header.find_first_of('='));
+        std::string value = header.substr(header.find_first_of('=') + 1);
+        headers[name] = value;
+    }
+    return headers;
 }
