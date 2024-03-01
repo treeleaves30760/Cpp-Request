@@ -1,4 +1,4 @@
-# CPP_request
+# C++ Request Library
 
 ## Descriptiom
 
