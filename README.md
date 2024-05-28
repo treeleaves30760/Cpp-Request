@@ -1,8 +1,8 @@
-# C++ Request Library
+# C++ Http Request Library
 
 ## Descriptiom
 
-This is a c++ library for web API request, you can use it like Python's request.
+This is a c++ library for web Http API request, you can use it like Python's request.
 
 ## Installation
 
